@@ -80,7 +80,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <section id="hero" className="relative h-screen flex items-center justify-center text-center overflow-hidden">
       {/* canvas background */}
       <canvas ref={canvasRef} className="absolute inset-0" />
 
