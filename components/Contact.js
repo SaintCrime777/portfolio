@@ -11,7 +11,7 @@ export default function Contact() {
       "專注於 React / Next.js 的互動式網站開發",
       "Open to opportunities 🚀",
     ],
-    []
+    [],
   );
 
   const [displayedLines, setDisplayedLines] = useState(["", "", ""]);
@@ -51,7 +51,7 @@ export default function Contact() {
       icon: FaBriefcase,
       color: "text-cyan-300",
       border: "border-cyan-400/40 hover:border-cyan-300",
-      glow: "hover:shadow-[0_0_25px_rgba(34,211,238,0.25)]",
+      glow: "glow-pulse",
     },
     {
       label: "Resume",
@@ -59,7 +59,7 @@ export default function Contact() {
       icon: FaFileAlt,
       color: "text-violet-300",
       border: "border-violet-400/40 hover:border-violet-300",
-      glow: "hover:shadow-[0_0_25px_rgba(167,139,250,0.25)]",
+      glow: "glow-pulse",
     },
     {
       label: "GitHub",
@@ -67,7 +67,7 @@ export default function Contact() {
       icon: SiGithub,
       color: "text-amber-300",
       border: "border-amber-400/40 hover:border-amber-300",
-      glow: "hover:shadow-[0_0_25px_rgba(252,211,77,0.22)]",
+      glow: "glow-pulse",
     },
     {
       label: "Email",
@@ -75,7 +75,7 @@ export default function Contact() {
       icon: SiGmail,
       color: "text-rose-300",
       border: "border-rose-400/40 hover:border-rose-300",
-      glow: "hover:shadow-[0_0_25px_rgba(251,113,133,0.22)]",
+      glow: "glow-pulse",
     },
   ];
 
@@ -118,9 +118,6 @@ export default function Contact() {
           <div className="grid grid-cols-2 gap-5 md:hidden">
             {contacts.map((item) => {
               const Icon = item.icon;
-              const isExternal =
-                item.href.startsWith("http") || item.href.startsWith("mailto:");
-
               return (
                 <a
                   key={item.label}
@@ -144,13 +141,23 @@ export default function Contact() {
           </div>
 
           {/* 大鑽石排佈 */}
-          <div className="hidden md:flex flex-col items-center gap-4">
-            <DiamondLink item={contacts[0]} />
-            <div className="flex gap-4">
+          <div className="relative hidden md:block w-[420px] h-[420px]">
+            {/* 上 */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2">
+              <DiamondLink item={contacts[0]} />
+            </div>
+            {/* 左 */}
+            <div className="absolute left-0 top-1/2 -translate-y-1/2">
               <DiamondLink item={contacts[2]} />
+            </div>
+            {/* 右 */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2">
               <DiamondLink item={contacts[3]} />
             </div>
-            <DiamondLink item={contacts[1]} />
+            {/* 下 */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2">
+              <DiamondLink item={contacts[1]} />
+            </div>
           </div>
         </div>
 
@@ -176,10 +183,10 @@ function DiamondLink({ item }) {
       <div
         className={`w-[135px] h-[135px] lg:w-[150px] lg:h-[150px]
           rotate-45 rounded-2xl border bg-white/5 backdrop-blur-md
-          transition duration-300 hover:scale-105 hover:bg-white/10
+          transition duration-300 group-hover:scale-110 group-hover:bg-white/10
           ${item.border} ${item.glow}`}
       />
-      <div className="absolute inset-0 flex items-center justify-center -rotate-45">
+      <div className="absolute inset-0 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <Icon
             className={`text-3xl lg:text-[34px] transition duration-300 group-hover:scale-110 ${item.color}`}
