@@ -20,33 +20,71 @@ import {
   SiPostman,
   SiLightning,
 } from "react-icons/si";
+import { SiFramer } from "react-icons/si";
+import { RiRobot2Line } from "react-icons/ri";
 
 export default function Skills() {
   const [activeDeck, setActiveDeck] = useState("frontend");
+  const [selectedSkill, setSelectedSkill] = useState(null);
 
   const frontend = [
-    { name: "React", icon: SiReact },
+    {
+      name: "React",
+      icon: SiReact,
+      level: "core",
+      description: [
+        "Component-based architecture (Card / Modal)",
+        "State management (useState / Context )",
+        "API integration & data rendering",
+        "Performance optimization (memo / lazy)",
+      ],
+      projects: ["is-cafe", "todo-list"],
+    },
     { name: "Next.js", icon: SiNextdotjs },
     { name: "TypeScript", icon: SiTypescript },
     { name: "Tailwind", icon: SiTailwindcss },
-    { name: "Zustand", icon: SiRedux }
+    { name: "Zustand", icon: SiRedux },
   ];
 
   const backend = [
-    { name: "Node.js", icon: SiNodedotjs },
+    {
+      name: "Node.js",
+      icon: SiNodedotjs,
+      level: "core",
+      description: [
+        "Backend server development",
+        "Handling async operations (API requests)",
+        "Basic REST API implementation",
+        "Integration with database",
+      ],
+      projects: ["Petopia"],
+    },
     { name: "Express", icon: SiExpress },
     { name: "MySQL", icon: SiMysql },
     { name: "Prisma", icon: SiPrisma },
     { name: "Supabase", icon: SiSupabase },
-    { name: "REST API", icon: SiLightning }, 
+    { name: "REST API", icon: SiLightning },
   ];
 
   const tools = [
+    {
+      name: "GSAP",
+      icon: SiFramer,
+      level: "core",
+      description: [
+        "Scroll-based animations",
+        "Component entrance animations",
+        "Stagger & timeline control",
+        "Improving UI interaction experience",
+      ],
+      projects: ["portfolio"],
+    },
     { name: "Git", icon: SiGit },
     { name: "GitHub", icon: SiGithub },
     { name: "Vercel", icon: SiVercel },
     { name: "Figma", icon: SiFigma },
     { name: "Postman", icon: SiPostman },
+    { name: "AI Assisted Dev", icon:RiRobot2Line }
   ];
 
   const renderCards = (skills) => {
@@ -58,11 +96,17 @@ export default function Skills() {
           return (
             <div
               key={skill.name}
+              onClick={() => {
+                if (skill.level === "core") {
+                  setSelectedSkill(skill);
+                }
+              }}
               className={`skill-card bg-white/5 backdrop-blur-md p-7 rounded-xl
                          border text-center
                          hover:scale-110 hover:bg-white/10
                          hover:shadow-lg transition duration-300
                          flex flex-col items-center justify-center gap-3 min-h-[140px]
+                         ${skill.level === "core" ? "cursor-pointer" : "cursor-default"}
                          ${
                            activeDeck === "frontend" &&
                            "border-blue-400/40 hover:border-blue-400"
@@ -84,8 +128,8 @@ export default function Skills() {
                     activeDeck === "frontend"
                       ? "text-blue-300"
                       : activeDeck === "backend"
-                      ? "text-purple-300"
-                      : "text-amber-300"
+                        ? "text-purple-300"
+                        : "text-amber-300"
                   }`}
                 />
               ) : (
@@ -93,9 +137,7 @@ export default function Skills() {
               )}
 
               {/* label */}
-              <p className="text-sm md:text-base font-medium">
-                {skill.name}
-              </p>
+              <p className="text-sm md:text-base font-medium">{skill.name}</p>
             </div>
           );
         })}
@@ -135,15 +177,18 @@ export default function Skills() {
         {["frontend", "backend", "tools"].map((deck) => (
           <button
             key={deck}
-            onClick={() => setActiveDeck(deck)}
+            onClick={() => {
+              setActiveDeck(deck);
+              setSelectedSkill(null);
+            }}
             className={`px-8 py-6 mb-3 rounded-xl transition
               ${
                 activeDeck === deck
                   ? deck === "frontend"
                     ? "bg-blue-500/20 text-blue-300"
                     : deck === "backend"
-                    ? "bg-purple-400/40 text-purple-400"
-                    : "bg-amber-400/40 text-amber-400"
+                      ? "bg-purple-400/40 text-purple-400"
+                      : "bg-amber-400/40 text-amber-400"
                   : "bg-white/5 hover:bg-white/10"
               }
             `}
@@ -155,9 +200,69 @@ export default function Skills() {
 
       {/* Cards */}
       <div key={activeDeck} className="relative transition-all duration-500">
-        {activeDeck === "frontend" && renderCards(frontend)}
-        {activeDeck === "backend" && renderCards(backend)}
-        {activeDeck === "tools" && renderCards(tools)}
+        {/* Frontend */}
+        {activeDeck === "frontend" && (
+          <>
+            {renderCards(frontend)}
+            {selectedSkill?.level === "core" && (
+              <div className="mt-16 w-full max-w-3xl bg-white/5 backdrop-blur-xl border border-blue-400/30 rounded-xl p-6 text-left animate-fade-in">
+                <h3 className="text-xl font-semibold mb-4 text-blue-300">
+                  {selectedSkill.name}
+                </h3>
+                <ul className="space-y-2 text-sm text-gray-300">
+                  {selectedSkill.description.map((item, i) => (
+                    <li key={i}>✔ {item}</li>
+                  ))}
+                </ul>
+                <div className="mt-4 text-sm text-gray-400">
+                  Used in: {selectedSkill.projects.join(", ")}
+                </div>
+              </div>
+            )}
+          </>
+        )}
+        {/* Backend */}
+        {activeDeck === "backend" && (
+          <>
+            {renderCards(backend)}
+            {selectedSkill?.level === "core" && (
+              <div className="mt-16 w-full max-w-3xl bg-white/5 backdrop-blur-xl border border-purple-400/30 rounded-xl p-6 text-left animate-fade-in">
+                <h3 className="text-xl font-semibold mb-4 text-purple-400">
+                  {selectedSkill.name}
+                </h3>
+                <ul className="space-y-2 text-sm text-gray-300">
+                  {selectedSkill.description.map((item, i) => (
+                    <li key={i}>✔ {item}</li>
+                  ))}
+                </ul>
+                <div className="mt-4 text-sm text-gray-400">
+                  Used in: {selectedSkill.projects.join(", ")}
+                </div>
+              </div>
+            )}
+          </>
+        )}
+        {/* Tools */}
+        {activeDeck === "tools" && (
+          <>
+            {renderCards(tools)}
+            {selectedSkill?.level === "core" && (
+              <div className="mt-16 w-full max-w-3xl bg-white/5 backdrop-blur-xl border border-amber-400/30 rounded-xl p-6 text-left animate-fade-in">
+                <h3 className="text-xl font-semibold mb-4 text-amber-400">
+                  {selectedSkill.name}
+                </h3>
+                <ul className="space-y-2 text-sm text-gray-300">
+                  {selectedSkill.description.map((item, i) => (
+                    <li key={i}>✔ {item}</li>
+                  ))}
+                </ul>
+                <div className="mt-4 text-sm text-gray-400">
+                  Used in: {selectedSkill.projects.join(", ")}
+                </div>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </section>
   );
