@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { SiGithub, SiGmail } from "react-icons/si";
-import { FaFileAlt, FaBriefcase } from "react-icons/fa";
+import { FaFileAlt, FaArrowUp  } from "react-icons/fa";
 
 export default function Contact() {
   const lines = useMemo(
@@ -17,8 +17,12 @@ export default function Contact() {
   const [displayedLines, setDisplayedLines] = useState(["", "", ""]);
   const [lineIndex, setLineIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
+  // 滑到才打字，**state/ref一定要在useEffect上
+  const sectionRef = useRef(null);
+  const [startTyping, setStartTyping] = useState(false);
 
   useEffect(() => {
+    if (!startTyping) return;
     if (lineIndex >= lines.length) return;
 
     const currentLine = lines[lineIndex];
@@ -42,20 +46,21 @@ export default function Contact() {
     }, 350);
 
     return () => clearTimeout(nextLineTimer);
-  }, [charIndex, lineIndex, lines]);
+  }, [charIndex, lineIndex, lines, startTyping]);
 
   const contacts = [
     {
-      label: "104",
-      href: "https://www.104.com.tw/",
-      icon: FaBriefcase,
+      label: "Back to Top",
+      href: "#hero",
+      icon: FaArrowUp ,
       color: "text-cyan-300",
       border: "border-cyan-400/40 hover:border-cyan-300",
       glow: "glow-pulse",
     },
     {
       label: "Resume",
-      href: "/resume.pdf",
+      href: "/CV(僅供面試使用).pdf",
+      external: true,
       icon: FaFileAlt,
       color: "text-violet-300",
       border: "border-violet-400/40 hover:border-violet-300",
@@ -63,7 +68,8 @@ export default function Contact() {
     },
     {
       label: "GitHub",
-      href: "https://github.com/your-github-account",
+      href: "https://github.com/saintcrime777",
+      external: true,
       icon: SiGithub,
       color: "text-amber-300",
       border: "border-amber-400/40 hover:border-amber-300",
@@ -71,7 +77,8 @@ export default function Contact() {
     },
     {
       label: "Email",
-      href: "mailto:your@email.com",
+      href: "https://mail.google.com/mail/?view=cm&to=snoopy921440@gmail.com",
+      external: true,
       icon: SiGmail,
       color: "text-rose-300",
       border: "border-rose-400/40 hover:border-rose-300",
@@ -79,8 +86,29 @@ export default function Contact() {
     },
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStartTyping(true);
+          observer.disconnect(); // 只觸發一次
+        }
+      },
+      {
+        threshold: 0.3,
+      },
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="contact"
       className="relative min-h-screen py-28 px-6 md:px-10 flex items-center justify-center overflow-hidden scroll-mt-24"
     >
@@ -122,8 +150,8 @@ export default function Contact() {
                 <a
                   key={item.label}
                   href={item.href}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noreferrer" : undefined}
                   className={`group w-[130px] h-[130px] rounded-2xl border bg-white/5 backdrop-blur-md
                     flex flex-col items-center justify-center gap-3
                     transition duration-300 hover:scale-105 hover:bg-white/10
@@ -176,8 +204,8 @@ function DiamondLink({ item }) {
   return (
     <a
       href={item.href}
-      target={item.href.startsWith("http") ? "_blank" : undefined}
-      rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+      target={item.external ? "_blank" : undefined}
+      rel={item.external ? "noopener noreferrer" : undefined}
       className="group relative block"
     >
       <div
@@ -187,7 +215,7 @@ function DiamondLink({ item }) {
           ${item.border} ${item.glow}`}
       />
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col items-center gap-3 pointer-events-none">
           <Icon
             className={`text-3xl lg:text-[34px] transition duration-300 group-hover:scale-110 ${item.color}`}
           />

@@ -84,7 +84,7 @@ export default function Skills() {
     { name: "Vercel", icon: SiVercel },
     { name: "Figma", icon: SiFigma },
     { name: "Postman", icon: SiPostman },
-    { name: "AI Assisted Dev", icon:RiRobot2Line }
+    { name: "AI Assisted Dev", icon: RiRobot2Line },
   ];
 
   const renderCards = (skills) => {
@@ -96,17 +96,11 @@ export default function Skills() {
           return (
             <div
               key={skill.name}
-              onClick={() => {
-                if (skill.level === "core") {
-                  setSelectedSkill(skill);
-                }
-              }}
               className={`skill-card bg-white/5 backdrop-blur-md p-7 rounded-xl
                          border text-center
                          hover:scale-110 hover:bg-white/10
                          hover:shadow-lg transition duration-300
                          flex flex-col items-center justify-center gap-3 h-[140px] w-[140px]
-                         ${skill.level === "core" ? "cursor-pointer" : "cursor-default"}
                          ${
                            activeDeck === "frontend" &&
                            "border-blue-400/40 hover:border-blue-400"
@@ -135,9 +129,11 @@ export default function Skills() {
               ) : (
                 <div className="text-3xl">⚙️</div>
               )}
-    
+
               {/* label */}
-              <p className="text-sm md:text-base font-medium truncate">{skill.name}</p>
+              <p className="text-sm md:text-base font-medium truncate">
+                {skill.name}
+              </p>
             </div>
           );
         })}
@@ -147,6 +143,12 @@ export default function Skills() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      const coreSkill =
+        activeDeck === "frontend"
+          ? frontend.find((s) => s.level === "core")
+          : activeDeck === "backend"
+            ? backend.find((s) => s.level === "core")
+            : tools.find((s) => s.level === "core");
       gsap.from(".skill-card", {
         y: 40,
         opacity: 0,
@@ -155,6 +157,13 @@ export default function Skills() {
         duration: 0.6,
         ease: "power3.out",
         clearProps: "all",
+        onComplete: () => {
+          if (coreSkill) {
+            requestAnimationFrame(() => {
+              setSelectedSkill(coreSkill);
+            });
+          }
+        },
       });
     });
 
