@@ -105,7 +105,7 @@ export default function Skills() {
                          border text-center
                          hover:scale-110 hover:bg-white/10
                          hover:shadow-lg transition duration-300
-                         flex flex-col items-center justify-center gap-3 min-h-[140px]
+                         flex flex-col items-center justify-center gap-3 h-[140px] w-[140px]
                          ${skill.level === "core" ? "cursor-pointer" : "cursor-default"}
                          ${
                            activeDeck === "frontend" &&
@@ -135,9 +135,9 @@ export default function Skills() {
               ) : (
                 <div className="text-3xl">⚙️</div>
               )}
-
+    
               {/* label */}
-              <p className="text-sm md:text-base font-medium">{skill.name}</p>
+              <p className="text-sm md:text-base font-medium truncate">{skill.name}</p>
             </div>
           );
         })}
