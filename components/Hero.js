@@ -34,7 +34,7 @@ export default function Hero() {
       ctx.clearRect(0, 0, w, h);
 
       ctx.globalCompositeOperation = "lighter";
-      
+
       particles.forEach((p) => {
         p.angle += p.speed;
 
@@ -80,7 +80,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <section
+      id="hero"
+      className="relative h-screen flex items-center justify-center text-center overflow-hidden"
+    >
       {/* canvas background */}
       <canvas ref={canvasRef} className="absolute inset-0" />
 
@@ -95,12 +98,17 @@ export default function Hero() {
         ></img>
         <h1 className="hero-title text-6xl font-bold mb-6">Hi, I'm Jimmy</h1>
 
-        <p className="hero-sub text-xl text-gray-400">Frontend Developer</p>
+        <h3 className="hero-sub text-2xl text-gray-300 mb-2">Frontend Developer</h3>
+        <p className="hero-sub text-lg text-gray-400 max-w-xl mx-auto">
+          I build interactive, user-focused web experiences
+          <br/>
+          with React & modern technologies
+        </p>
       </div>
 
       {/* scroll hint */}
-      <div className="absolute bottom-10 text-gray-400 animate-bounce">
-        ↓🖱 scroll
+      <div className="absolute bottom-20 text-gray-400 animate-bounce">
+        ↓ View More
       </div>
     </section>
   );

@@ -7,9 +7,11 @@ import { FaFileAlt, FaArrowUp  } from "react-icons/fa";
 export default function Contact() {
   const lines = useMemo(
     () => [
-      "Frontend Developer",
-      "專注於 React / Next.js 的互動式網站開發",
-      "Open to opportunities 🚀",
+      "熱情與幽默，是我與他人相處的方式",
+      "穩定與責任，是我對自己的要求",
+      "我相信—勇氣不是沒有恐懼，而是能夠面對並克服它",
+      "Stay hungry stay foolish；專注當下、持續成長",
+      "讓每一次累積，都成為下一次突破的基石 🚀",
     ],
     [],
   );
