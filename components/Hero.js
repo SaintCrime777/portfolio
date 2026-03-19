@@ -107,7 +107,7 @@ export default function Hero() {
       </div>
 
       {/* scroll hint */}
-      <div className="absolute bottom-20 text-gray-400 animate-bounce">
+      <div className="absolute bottom-10 md:bottom-20 text-gray-400 animate-bounce">
         ↓ View More
       </div>
     </section>
