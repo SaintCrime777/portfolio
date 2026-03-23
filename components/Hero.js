@@ -98,11 +98,12 @@ export default function Hero() {
         ></img>
         <h1 className="hero-title text-6xl font-bold mb-6">Hi, I'm Jimmy</h1>
 
-        <h3 className="hero-sub text-2xl text-gray-300 mb-2">Frontend Developer</h3>
+        <h3 className="hero-sub text-2xl text-gray-300 mb-2">
+          Frontend Developer
+        </h3>
         <p className="hero-sub text-lg text-gray-400 max-w-xl mx-auto">
-          I build interactive, user-focused web experiences
-          <br/>
-          with React & modern technologies
+          Built 4 production apps with OAuth, AI, E-commerce 
+          <br/>🔵Trilingual (ZH/EN/JP) 🔵 Law background 🔵 Seeking frontend role
         </p>
       </div>
 
