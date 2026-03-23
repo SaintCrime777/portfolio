@@ -196,7 +196,7 @@ export default function Contact() {
 
         {/* footer text */}
         <p className="mt-14 text-sm text-white/45">
-          © 2026 Jimmy Zhao — Built with Next.js
+          © 2026 Jimmy Zhao — Built with Next.js · Performance optimized
         </p>
       </div>
     </section>
