@@ -31,13 +31,19 @@ export default function Projects() {
       github: "https://github.com/SaintCrime777/todo-list-drip",
     },
   ];
-// 注意GSAP的Y軸可能會有頂不同高的時候
- useEffect(() => {
+  gsap.registerPlugin(ScrollTrigger);
+  // 注意GSAP的Y軸可能會有頂不同高的時候
+  useEffect(() => {
     gsap.from(".project-card", {
       opacity: 0,
       duration: 0.8,
       stagger: 0.6,
       ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".project-card",
+        start: "top 80%",
+        once: true,
+      },
     });
   }, []);
 
@@ -85,9 +91,7 @@ export default function Projects() {
             {/* 內容區 */}
             <div className="p-6 flex flex-col flex-grow">
               {/* 標題 */}
-              <h3 className="text-xl font-bold mb-2">
-                {project.title}
-              </h3>
+              <h3 className="text-xl font-bold mb-2">{project.title}</h3>
 
               {/* 一句話亮點 */}
               <p className="text-sm text-gray-400 mb-4 leading-relaxed">
