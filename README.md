@@ -11,7 +11,7 @@
 
 ## 技術棧
 
-`Next.js` `React` `TypeScript` `Tailwind CSS` `Supabase` `Zustand`
+`Next.js` `React` `Tailwind CSS` `Zustand`
 
 ## 收錄專案
 
