@@ -6,19 +6,19 @@
 
 ## 關於這個專案
 
-以 **Next.js** 打造的個人作品集，展示 4 個 production 等級的應用，  
+以 **Next.js** 打造的個人作品集入口，展示 4 個 production 等級的應用，  
 涵蓋 OAuth 登入、AI 整合、電商功能等真實場景。
 
 ## 技術棧
 
-`Next.js` `React` `Tailwind CSS` `Zustand`
+`Next.js` `React` `Tailwind CSS` `GSAP`
 
 ## 收錄專案
 
 | 專案 | 亮點 |
 |------|------|
 | [is-cafe](https://is-cafe.vercel.app) | OAuth 登入 + 購物車 + 訂單管理 |
-| Petopia | 團隊專案 · 論壇 · 富文本編輯（Next.js + Prisma） |
+| [Petopia](https://www.youtube.com/watch?v=tEkTOc4Ltts) | 團隊專案 · 論壇 · 富文本編輯（Next.js + Prisma） |
 | [Todo List](https://todo-list-drip.vercel.app) | 四象限時間管理 · localStorage 持久化 |
 
 
