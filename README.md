@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jimmy's Portfolio
 
-## Getting Started
+> Frontend Developer｜三語（中/英/日）｜法律背景跨界技術
 
-First, run the development server:
+[![Live Demo](https://img.shields.io/badge/🚀_Live-portfolio-blue)](https://portfolio-pi-olive-65.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 關於這個專案
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+以 **Next.js** 打造的個人作品集入口，展示 4 個 production 等級的應用，  
+涵蓋 OAuth 登入、AI 整合、電商功能等真實場景。
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 技術棧
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`Next.js` `React` `Tailwind CSS` `GSAP`
 
-## Learn More
+## 收錄專案
 
-To learn more about Next.js, take a look at the following resources:
+| 專案 | 亮點 |
+|------|------|
+| [is-cafe](https://is-cafe.vercel.app) | OAuth 登入 + 購物車 + 訂單管理 |
+| [Petopia](https://www.youtube.com/watch?v=tEkTOc4Ltts) | 團隊專案 · 論壇 · 富文本編輯（Next.js + Prisma） |
+| [Todo List](https://todo-list-drip.vercel.app) | 四象限時間管理 · localStorage 持久化 |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
