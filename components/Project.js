@@ -67,7 +67,7 @@ export default function Projects() {
             key={project.title}
             className="
               project-card
-              bg-[#1a1a1a]
+              bg-white/5 backdrop-blur-md
               rounded-xl
               overflow-hidden
               border border-white/10

@@ -173,13 +173,13 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen relative py-32 flex flex-col items-center overflow-hidden scroll-mt-24"
+      className="min-h-screen relative py-28 flex flex-col items-center overflow-hidden scroll-mt-24"
     >
       {/* 背景 */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_60%)]"></div>
 
       {/* Title */}
-      <h2 className="text-3xl font-bold mb-16 relative">Skills</h2>
+      <h2 className="text-3xl font-bold mb-12 relative">Skills</h2>
 
       {/* Tabs */}
       <div className="flex gap-6 relative">
