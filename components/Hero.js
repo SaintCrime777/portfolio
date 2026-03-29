@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 
 export default function Hero() {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -83,15 +83,27 @@ export default function Hero() {
     window.addEventListener("resize", handleResize);
 
     // ── GSAP entrance timeline ──────────────────────────────
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    gsap.set(".hero-name", { y: 80, opacity: 0 });
+    gsap.set(".hero-tag", { y: -20, opacity: 0 });
+    gsap.set(".hero-role", { y: 30, opacity: 0 });
+    gsap.set(".hero-desc-line", { y: 20, opacity: 0 });
+    gsap.set(".hero-avatar", { scale: 0.7, opacity: 0 });
+    gsap.set(".hero-cta", { y: 20, opacity: 0 });
+    gsap.set(".hero-scroll", { opacity: 0 });
 
-    tl.from(".hero-tag", { y: -20, opacity: 0, duration: 0.6 })
-      .from(".hero-name", { y: 80, opacity: 0, duration: 1, skewY: 4 }, "-=0.2")
-      .from(".hero-role", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5")
-      .from(".hero-desc-line", { y: 20, opacity: 0, duration: 0.6, stagger: 0.12 }, "-=0.4")
-      .from(".hero-avatar", { scale: 0.7, opacity: 0, duration: 1, ease: "elastic.out(1,0.6)" }, "-=0.8")
-      .from(".hero-cta", { y: 20, opacity: 0, duration: 0.6 }, "-=0.4")
-      .from(".hero-scroll", { opacity: 0, duration: 0.6 }, "-=0.2");
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" ,opacity:0 } });
+
+    tl.to(".hero-tag", { y: 0, opacity: 1, duration: 0.6 })
+      .to(".hero-name", { y: 0, opacity: 1, duration: 1 }, "-=0.2")
+      .to(".hero-role", { y: 0, opacity: 1, duration: 0.8 }, "-=0.5")
+      .to(
+        ".hero-desc-line",
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.12 },
+        "-=0.4",
+      )
+      .to(".hero-avatar", { scale: 1, opacity: 1, duration: 1 }, "-=0.8")
+      .to(".hero-cta", { y: 0, opacity: 1, duration: 0.6 }, "-=0.4")
+      .to(".hero-scroll", { opacity: 1, duration: 0.6 }, "-=0.2");
 
     return () => {
       cancelAnimationFrame(animId);
@@ -214,10 +226,8 @@ export default function Hero() {
 
         {/* ── Main content: asymmetric two-column ── */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-8 md:px-16 flex flex-col md:flex-row items-center md:items-start justify-between gap-12 pt-20">
-
           {/* Left: Text block */}
           <div className="flex-1 flex flex-col justify-center md:pt-16">
-
             {/* Tag */}
             <div className="hero-tag inline-flex items-center gap-2 text-xs text-blue-400/80 uppercase mb-6 w-fit">
               <span className="w-6 h-px bg-blue-400/60" />
@@ -227,7 +237,9 @@ export default function Hero() {
 
             {/* Big name */}
             <h1 className="hero-name gradient-text text-[clamp(3.5rem,9vw,8rem)] mb-6">
-              Jimmy<br />Chao
+              Jimmy
+              <br />
+              Chao
             </h1>
 
             {/* Role */}
@@ -242,7 +254,10 @@ export default function Hero() {
                 "Trilingual  ZH / EN / JP",
                 "Law background → Code",
               ].map((line, i) => (
-                <p key={i} className="hero-desc-line text-sm text-gray-400 flex items-center gap-3">
+                <p
+                  key={i}
+                  className="hero-desc-line text-sm text-gray-400 flex items-center gap-3"
+                >
                   <span className="w-1 h-1 rounded-full bg-blue-400/60 flex-shrink-0" />
                   {line}
                 </p>
